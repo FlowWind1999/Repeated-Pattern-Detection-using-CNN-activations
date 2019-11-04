@@ -27,7 +27,7 @@ peaks_max = 10000
 
 preprocess_transform = transforms.Compose([transforms.ToTensor()])
 
-dev = torch.device("cuda")
+dev = torch.device("cpu")
 model = alexnet_conv_layers()
 model.to(dev)
 
@@ -84,7 +84,9 @@ def detection(img_path):
 
     print("peaks extraction!")
     # compute displacement set and voting space
-    pickefile = "V_" + os.path.basename(img_path) + ".pkl"
+    if not os.path.exists("./V"):
+        os.mkdir("./V")
+    pickefile = "./V/V_" + os.path.basename(img_path) + ".pkl"
     if os.path.exists(pickefile):
         with open(pickefile, 'rb') as f:
             V = pickle.load(f)
@@ -250,7 +252,7 @@ def detection(img_path):
 
 
 if __name__ == '__main__':
-    #img_path = "爆片绝缘子.png"
+    #img_path = "rot/111111.png"
     #detection(img_path)
-    img_path = "000025.png"
+    img_path = "rot/000025.png"
     detection(img_path)

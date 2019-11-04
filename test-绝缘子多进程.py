@@ -85,7 +85,9 @@ def detection(img_path):
 
     print("peaks extraction!")
     # compute displacement set and voting space
-    pickefile = "V_" + os.path.basename(img_path) + ".pkl"
+    if not os.path.exists("./V"):
+        os.mkdir("./V")
+    pickefile = "./V/V_" + os.path.basename(img_path) + ".pkl"
     if os.path.exists(pickefile):
         with open(pickefile, 'rb') as f:
             V = pickle.load(f)

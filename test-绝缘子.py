@@ -267,5 +267,5 @@ def detection(img_path):
 
 
 if __name__ == '__main__':
-    img_path = "./rot/000000.png"
+    img_path = "./rot/111111.png"
     detection(img_path)

@@ -1,8 +1,9 @@
 from matplotlib import pyplot as plt
 from matplotlib.patches import Polygon, Rectangle
 from matplotlib.collections import PatchCollection
+import os
 
-def custom_plot(image, box=None, polygons=None):
+def custom_plot(image, box=None, polygons=None,name=None):
     #target.extra_fields['masks'].polygons è una lista in cui ogni elemento ha un .polygons
     # che è una lista di tensor
 
@@ -11,8 +12,8 @@ def custom_plot(image, box=None, polygons=None):
 
     if box is not None:
         for bb in box:
-            rect = Rectangle((int(bb[0]), int(bb[1])), int(bb[2]), int(bb[3]), linewidth=1, edgecolor='r'
-                                     , facecolor='none')
+            rect = Rectangle((int(bb[0]), int(bb[1])), int(bb[2]), int(bb[3]), \
+                             linewidth=1, edgecolor='r', facecolor='none')
 
             ax.add_patch(rect)
 
@@ -27,4 +28,7 @@ def custom_plot(image, box=None, polygons=None):
         p.set_edgecolor('r')
         ax.add_collection(p)
 
+    if os.path.exists("./res"):
+        os.mkdir("./res")
+    plt.savefig("./res/"+name)
     plt.show()

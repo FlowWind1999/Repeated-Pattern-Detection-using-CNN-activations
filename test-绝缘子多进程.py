@@ -266,13 +266,13 @@ def detection(img_path):
     else:
         print("{} is well-being".format(name))
     print("{} used time is {} min".format(name, (end - start) / 60.0))
-    custom_plot(tmp_img, box=boxes)
+    custom_plot(tmp_img, box=boxes,name = name)
 
 
 if __name__ == '__main__':
-    p1 = multiprocessing.Process(target=detection, args=("./rot/111111.png",))
+    p1 = multiprocessing.Process(target=detection, args=("./rot/000000.png",))
     p2 = multiprocessing.Process(target=detection, args=("./rot/000025.png",))
-    p3 = multiprocessing.Process(target=detection, args=("./rot/000003.png",))
+    p3 = multiprocessing.Process(target=detection, args=("./rot/111111.png",))
 
     p1.start()
     p2.start()

@@ -249,7 +249,7 @@ def detection(img_path):
                 min_c = min_rc[1] + (dstar[1] * ci) - dstar[0] / 2
                 if min_c + dstar[1] < tmp_img.shape[1] and min_c > 0:
                     sums = np.sum(tmp_img[int(min_r):int(min_r + dstar[0]), int(min_c):int(min_c + dstar[1]), 0] > 0)
-                    if sums > 0.8 * dstar[0] * dstar[1]:
+                    if sums > 0.7 * dstar[0] * dstar[1]:
                         flag[0] = True
                         tmp_box = np.asarray([min_c, min_r, dstar[1], dstar[0]])
                         boxes.append(tmp_box)

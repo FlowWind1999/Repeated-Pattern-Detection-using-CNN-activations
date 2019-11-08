@@ -14,7 +14,6 @@ def custom_plot(image, box=None, polygons=None,name=None):
         for bb in box:
             rect = Rectangle((int(bb[0]), int(bb[1])), int(bb[2]), int(bb[3]), \
                              linewidth=1, edgecolor='r', facecolor='none')
-
             ax.add_patch(rect)
 
     if polygons is not None:
@@ -31,4 +30,5 @@ def custom_plot(image, box=None, polygons=None,name=None):
     if not os.path.exists("./res"):
         os.mkdir("./res")
     plt.savefig("./res/"+name)
+
     plt.show()

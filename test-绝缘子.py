@@ -254,18 +254,18 @@ def detection(img_path):
                         tmp_box = np.asarray([min_c, min_r, dstar[1], dstar[0]])
                         boxes.append(tmp_box)
                     else:
-                        if flag[0] == True:
+                        if flag[0]:
                             flag[1] = flag[1]+1
-        if(flag[1] > 1):
+        if flag[1] > 1:
             flag[2] = True
 
     name = os.path.basename(img_path)
     end = time.time()
     print("{} is breaken".format(name))
     print("{} used time is {} min".format(name, (end - start) / 60.0))
-    custom_plot(tmp_img, box=boxes)
+    custom_plot(tmp_img, box=boxes,name=name)
 
 
 if __name__ == '__main__':
-    img_path = "./rot/111111.png"
+    img_path = "./rot/000025.png"
     detection(img_path)

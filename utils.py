@@ -28,7 +28,7 @@ def custom_plot(image, box=None, polygons=None,name=None):
         p.set_edgecolor('r')
         ax.add_collection(p)
 
-    if os.path.exists("./res"):
+    if not os.path.exists("./res"):
         os.mkdir("./res")
     plt.savefig("./res/"+name)
     plt.show()

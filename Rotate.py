@@ -7,8 +7,9 @@ import cv2
 import numpy as np
 from sklearn import linear_model
 from matplotlib import pyplot as plt
-from matplotlib.patches import Rectangle
 
+
+min_ang = 0.01
 nMaxThread = threading.Semaphore(4)  # 这里设置需要开启几条线程
 def rotate(img_path):
     with nMaxThread:
@@ -21,7 +22,7 @@ def rotate(img_path):
 
         ang = 360
         # 旋转多次
-        while math.fabs(ang) > 0.01:
+        while math.fabs(ang) > min_ang:
             points_x = []
             points_y = []
             for r in range(row):

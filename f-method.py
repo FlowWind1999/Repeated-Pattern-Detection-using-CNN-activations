@@ -17,12 +17,14 @@ def draw_func(img_path):
         count = np.sum(o_pic[:, i, 2])
         if count:
             y.append(count)
-
-    #print(y)
+    deta = sorted(y)[int(len(y) * 0.6)]
+    deta = np.array([deta]*len(y))
+    # print(y)
     plt.figure()
     x = np.arange(len(y))
     y = np.array(y)
     plt.plot(x, y)
+    plt.plot(x, deta)
     plt.savefig("./func/" + os.path.basename(img_path))
     # plt.show()
 
@@ -38,7 +40,8 @@ def f_method(img_path):
         if count:
             y.append(count)
 
-    deta = max(y) * 0.75
+    # deta = sorted(y)[int(len(y) * 0.6)]
+    deta = max(y)*0.75
     len_y = len(y)
     s = weight = 0
     o_c = len_y / 2
@@ -48,7 +51,7 @@ def f_method(img_path):
             weight += y[i]
     p_c = s/weight
     print(p_c, o_c)
-    if abs(p_c - o_c)/o_c > 0.03:
+    if abs(p_c - o_c)/o_c > 0.05:
         print(os.path.basename(img_path)+" is breaken!!!")
 
 '''利用峰值间距判断法'''
@@ -62,7 +65,7 @@ def peak_method(img_path):
         if count:
             y.append(count)
 
-    deta = max(y) * 0.8
+    deta = sorted(y)[int(len(y) * 0.6)]
     len_y = len(y)
 
     peaks = [i for i in range(1, len_y-1)
@@ -73,10 +76,11 @@ def peak_method(img_path):
     gap = [i for i in gap if i > sum(gap)/len(gap)/1.5]
     # print(gap)
     gap = np.array(gap)
-    # var = np.var(gap)
+    # var = np.var(gap)  //方差
     var = max(gap)
-    most_num = stats.mode(gap)[0][0]
-    if var > 1.5 * most_num:
+    # most_num = stats.mode(gap)[0][0] 众数
+    mid = np.median(gap)
+    if var > 1.75 * mid:
         print(os.path.basename(img_path)+" is breaken!!!")
 
 

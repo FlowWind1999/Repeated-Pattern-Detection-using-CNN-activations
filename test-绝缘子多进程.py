@@ -20,7 +20,8 @@ from utils import custom_plot
 # parameters
 sigma_l = []
 alfa_l = [5, 7, 15, 15, 15]
-fi_prctile = 80
+# fi_prctile = 80
+fi_prctile = 60
 delta = 0.65
 
 subsample_pairs = 10

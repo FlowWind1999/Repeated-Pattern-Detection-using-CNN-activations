@@ -10,7 +10,7 @@ from cv2 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 sigma = 5
-
+fi = 0.65
 global TP
 global FP
 global FN
@@ -34,7 +34,7 @@ def draw_func(img_path):
     # x = [x for x in range(len_y)]
     # f = interpolate.interp1d(x, y, kind='cubic')
     # y = f(x)
-    deta = sorted(y)[int(len_y * 0.65)]  # 取上60%分位点
+    deta = sorted(y)[int(len_y * fi)]  # 取上60%分位点
     peaks = [i for i in range(len_y)
             if y[i] == max(y[max(0, i-sigma):min(i+sigma, len_y)]) and y[i] >= deta]
     '''
@@ -94,9 +94,8 @@ def peak_method(img_path):
         cnt = np.sum(o_pic[:, i, 2])
         if cnt:
             y.append(cnt)
-
-    deta = sorted(y)[int(len(y) * 0.65)]   # 取上60%分位点
     len_y = len(y)
+    deta = sorted(y)[int(len_y * fi)]   # 取上60%分位点
     peaks = [i for i in range(len_y)
              if y[i] == max(y[max(0, i-sigma):min(i+sigma, len_y)]) and y[i] >= deta]
     gap = [peaks[i]-peaks[i-1] for i in range(1, len(peaks))]
@@ -138,14 +137,14 @@ if __name__ == '__main__':
     filelist = os.listdir("./rot")
     for file in filelist:
         img_path = "./rot/" + file
-        # draw_func(img_path)
+        draw_func(img_path)
         peak_method(img_path)
     end = time.time()
 
     pre = TP/(TP+FP)
     recall = TP/(TP+FN)
     F1score = 2*pre*recall/(pre+recall)
-    print("pre : ", pre)
+    print("precision : ", pre)
     print("recall : ", recall)
     print("F1score : ", F1score)
     print("total used time is {} s".format(end - start))

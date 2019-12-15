@@ -1,5 +1,11 @@
 import numpy as np
+import os
 
-arr=np.random.uniform(low=0.0, high=1.0, size=(1000, 1000))
-tal = np.sum(arr[100:200, 100:200] > 0.5)
-print(tal)
+sum = 0
+filelist = os.listdir("./seg")
+for file in filelist:
+    if len(file)>10:
+        print(file)
+        sum += 1
+print(sum)
+

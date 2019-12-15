@@ -9,9 +9,9 @@ from sklearn import linear_model
 from matplotlib import pyplot as plt
 
 
-min_ang = 0.01
+min_ang = 0.015
 nMaxThread = threading.Semaphore(4)  # 这里设置需要开启几条线程
-def rotate(img_path):
+def rotate(img_path=None):
     with nMaxThread:
         o_pic = cv2.imread(img_path, 1)
         row = o_pic.shape[0]
@@ -52,15 +52,15 @@ def rotate(img_path):
                 pic = cv2.warpAffine(pic, rot, (o_pic.shape[1], o_pic.shape[0]))
                 o_pic = cv2.warpAffine(o_pic, rot, (o_pic.shape[1], o_pic.shape[0]))
 
+
         cv2.imwrite("./rot/" + os.path.basename(img_path), o_pic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
         #cv2.imshow(os.path.basename(img_path), o_pic)
         #cv2.waitKey(0)
 
 if __name__ == '__main__':
     start = time.time()
-    #img_path = './seg/000038.png'
-    #rotate(img_path)
-
+    # img_path = './seg/000363.png'
+    # rotate(img_path)
     thds = []
     filelist = os.listdir("./seg")
     for file in filelist:
@@ -73,6 +73,5 @@ if __name__ == '__main__':
         #rotate(img_path)
     for thd in thds:
         thd.join()
-
     end = time.time()
     print("total used time is {} s".format(end-start))
